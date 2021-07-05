@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import "../styles/components-styles/pageNav.scss"
-// import "../styles/general/mixins.scss"
+import photo from '../assets/images/E-Auto.png'
 import {Link} from 'react-router-dom'
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
@@ -15,11 +15,13 @@ const PageNav = () => {
     }
     return (
         <>
+            <div className="header_container">
             <div className="navbar">
                 <Link to="#" className="menu-bars">
                     <FaIcons.FaBars onClick={showSideBar}/>
                 </Link>
-                <span>Menu</span>
+                <a>Logo</a>
+
             </div>
             <nav className={sidebar ? 'nav-menu active' : 'nav-menu '}>
                 <ul className="nav-menu-items" onClick={showSideBar}>
@@ -40,7 +42,9 @@ const PageNav = () => {
                     })}
                 </ul>
             </nav>
-        </>
+            </div>
+            <img className="photo_header" alt="E-Auto" src={photo}></img>
+            </>
     );
 }
 

@@ -15,11 +15,17 @@ export const SideBarData = [
         className: 'nav-text'
     },
     {
-        title: 'Oblicz/porównaj',
+        title: 'Oblicz',
         path: '/Oblicz',
         icon: <HiIcons.HiCalculator/>,
         className: 'nav-text'
+    },    {
+        title: 'Porównaj',
+        path: '/Oblicz',
+        icon: <BiIcons.BiGitCompare/>,
+        className: 'nav-text'
     },
+
     {
         title: 'Mapa',
         path: '/Map',
