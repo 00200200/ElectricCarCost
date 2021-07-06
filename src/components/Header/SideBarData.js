@@ -21,29 +21,29 @@ export const SideBarData = [
         className: 'nav-text'
     },    {
         title: 'Porównaj',
-        path: '/Oblicz',
+        path: '/Porównaj',
         icon: <BiIcons.BiGitCompare/>,
         className: 'nav-text'
     },
-
-    {
-        title: 'Mapa',
-        path: '/Map',
-        icon: <BiIcons.BiMap/>,
-        className: 'nav-text'
-    },
-    {
-        title: 'Kontakt',
-        path: '/Contact',
-        icon: <TiIcons.TiContacts/>,
-        className: 'nav-text'
-    },
-    {
-        title: 'O nas',
-        path: '/AboutUs',
-        icon: <RiIcons.RiInformationLine/>,
-        className: 'nav-text'
-    }
+    //
+    // {
+    //     // title: 'Mapa',
+    //     // path: '/Map',
+    //     icon: <BiIcons.BiMap/>,
+    //     className: 'nav-text'
+    // },
+    // {
+    //     // title: 'Kontakt',
+    //     // path: '/Contact',
+    //     icon: <TiIcons.TiContacts/>,
+    //     className: 'nav-text'
+    // },
+    // {
+    //     // title: 'O nas',
+    //     // path: '/AboutUs',
+    //     icon: <RiIcons.RiInformationLine/>,
+    //     className: 'nav-text'
+    // }
 
     ]
 ;

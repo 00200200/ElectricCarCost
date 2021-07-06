@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import "../styles/components-styles/pageNav.scss"
-import photo from '../assets/images/E-Auto.png'
+
 import {Link} from 'react-router-dom'
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
 import {SideBarData} from './SideBarData'
-import {DivStyled} from "./PageNav.styles";
+import Map from "../Map/Map";
 
 const PageNav = () => {
     const [sidebar, setSideBar] = useState(false)
@@ -20,6 +20,7 @@ const PageNav = () => {
                 <Link to="#" className="menu-bars">
                     <FaIcons.FaBars onClick={showSideBar}/>
                 </Link>
+
                 <a>Logo</a>
 
             </div>
@@ -43,7 +44,6 @@ const PageNav = () => {
                 </ul>
             </nav>
             </div>
-            <img className="photo_header" alt="E-Auto" src={photo}></img>
             </>
     );
 }
