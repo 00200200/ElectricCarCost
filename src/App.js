@@ -4,6 +4,7 @@ import MainPage from "./pages/MainPage";
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Oblicz from './pages/Oblicz/Oblicz'
 import NotFound from './pages/NotFound/NotFound'
+import Porównaj from './pages/Porównaj/Porównaj'
 
 // import Map from "./components/Map/Map"
 function App() {
@@ -15,6 +16,7 @@ function App() {
                 <Switch>
                     <Route exact path='/' component={MainPage}/>
                     <Route exact path='/Oblicz' component={Oblicz}/>
+                    <Route exact path='/Porównaj' component={Porównaj}/>
                     <Route component={NotFound}/>
                 </Switch>
             </div>

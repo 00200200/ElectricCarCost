@@ -9,6 +9,8 @@ export const FormStyle = styled.form`
     justify-content:center;
   align-items:center;
   flex-direction:column;
+  margin:0 auto;
+
     `
 
 export const LabelContainer = styled.div`
@@ -21,6 +23,7 @@ export const LabelContainer = styled.div`
   border:1px solid black;
   border-radius:15px;
   padding:0.2rem;
+ color:white;
 `
 export const CalculateLabel = styled.label`
   width:40%;
@@ -32,4 +35,11 @@ export const InputNumber = styled.input`
   border-bottom: 1px solid black;
   width:15%;
   text-align:right;
+`
+
+export const ImgStyles = styled.img `
+position:absolute;
+  z-index:-10;
+  height:110vh;
+  width:100%;
 `
