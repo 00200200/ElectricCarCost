@@ -2,21 +2,25 @@ import React, {useEffect, useState} from 'react';
 import Map from "../../components/Map/Map";
 import PageNav from "../../components/Header/PageNav";
 import {ObliczContainer} from "./Oblicz.styles.js";
-import {FormStyle, CalculateLabel, LabelContainer, InputNumber,ImgStyles} from "./Oblicz.styles.js";
+import {FormStyle, CalculateLabel, LabelContainer, InputNumber, ImgStyles} from "./Oblicz.styles.js";
 import "./obliczstyle.scss"
 import photo from "../assets/images/Background.png"
+
 const Oblicz = () => {
-    const [kmMonth, setKmMonth] = useState()
-    const [yearCost, setYearCost] = useState()
-    const [variableServiceYearCost, setVariableServiceYearCost] = useState()
-    const [variableTireYearCost, setVariableTireYearCost] = useState()
-    const [batteryChange, setBatteryChange] = useState()
-    const [energyCost, setEnergyCost] = useState()
-    const [energyConsumption, setEnergyConsumption] = useState()
-    const [chargePower, setChargePower] = useState()
-    const [chargerCapacity, setChargerCapacity] = useState()
-    const [electricalOutlet, setElectricalOutlet] = useState()
-    const [informations,setInformations] = useState([])
+    const [name, setName] = useState("")
+    const [kmMonth, setKmMonth] = useState("")
+    const [yearCost, setYearCost] = useState("")
+    const [variableServiceYearCost, setVariableServiceYearCost] = useState("")
+    const [variableTireYearCost, setVariableTireYearCost] = useState("")
+    const [batteryChange, setBatteryChange] = useState("")
+    const [energyCost, setEnergyCost] = useState("")
+    const [energyConsumption, setEnergyConsumption] = useState("")
+    const [chargePower, setChargePower] = useState("")
+    const [chargerCapacity, setChargerCapacity] = useState("")
+    const [electricalOutlet, setElectricalOutlet] = useState("")
+    const [informations, setInformations] = useState([])
+    const [disable, setDisable] = useState(true)
+    const [error, setError] = useState("")
 
 
     const YearKm = kmMonth * 12
@@ -26,11 +30,28 @@ const Oblicz = () => {
     const EnergyYearCost = (((energyConsumption * YearKm) / 100) * energyCost)
     const YearCost = TiresSwap + serviceCost + batteryYearCost + EnergyYearCost
     const OneKmCost = YearCost / YearKm
+    useEffect(() => {
+        if (name != "" && kmMonth != "" && yearCost != "" && variableServiceYearCost != "" && variableTireYearCost != "" && batteryChange != "" && energyCost != "" && energyConsumption != "")
+        {  setDisable(false)
+ setError("")
+        }
 
+        else {setError("Wypełnij wszystkie pola")}
+    })
 
     const onSubmitClick = (e) => {
         e.preventDefault()
-        setInformations([...informations,{YEARKM:YearKm,TIRESWAP:TiresSwap,SERVICECOST:serviceCost,BATTERYKMYEARCOST:batteryYearCost,ENERGYYEARCOST:EnergyYearCost,YEARCOST:YearCost,ONEKMCOST:OneKmCost}])
+        setInformations([...informations,{
+            NAME: name,
+            YEARKM: YearKm,
+            TIRESWAP: TiresSwap,
+            SERVICECOST: serviceCost,
+            BATTERYYEARCOST: batteryYearCost,
+            ENERGYYEARCOST: EnergyYearCost,
+            YEARCOST: YearCost,
+            ONEKMCOST: OneKmCost
+        }])
+        setName("")
         setKmMonth("")
         setYearCost("")
         setVariableTireYearCost("")
@@ -42,8 +63,9 @@ const Oblicz = () => {
         setChargePower("")
         setChargerCapacity("")
         setElectricalOutlet("")
-        localStorage.setItem('costInfo',JSON.stringify(informations))
+        localStorage.setItem('costInfo', JSON.stringify(informations))
         // JSON.parse(localStorage.getItem('costInfo'))
+
 
     }
 
@@ -52,9 +74,13 @@ const Oblicz = () => {
         <ObliczContainer>
             <PageNav/>
             <FormStyle>
-                <ImgStyles src={photo} ></ImgStyles>
-                <h1 style={{color:"white"}}>Oblicz koszt utrzymania oraz czas ładowania elektrycznego samochodu</h1>
-                <span style={{color:"white"}}>Od ceny nie jest odliczany podatek</span>
+                <ImgStyles src={photo}></ImgStyles>
+                <h1 style={{color: "white"}}>Oblicz koszt utrzymania oraz czas ładowania elektrycznego samochodu</h1>
+                <span style={{color: "white"}}>Od ceny nie jest odliczany podatek</span>
+                <LabelContainer>
+                    <CalculateLabel> Nazwa pojazdu </CalculateLabel><InputNumber
+                    value={name} onChange={e => setName(e.target.value)} className="inputNumber" type="text"
+                    placeholder="np:Audi Q4 e-tron"></InputNumber></LabelContainer>
                 <LabelContainer>
                     <CalculateLabel> Ile km pokonujesz miesiecznie <span>[km]</span></CalculateLabel><InputNumber
                     value={kmMonth} onChange={e => setKmMonth(e.target.value)} className="inputNumber" type="number"
@@ -66,7 +92,7 @@ const Oblicz = () => {
                     <InputNumber
                         value={yearCost} onChange={e => setYearCost(e.target.value)} className="inputNumber"
                         placeholder="2500" type="number"></InputNumber></LabelContainer>
-                <p style={{color:"white"}}>Koszty zmienne</p>
+                <p style={{color: "white"}}>Koszty zmienne</p>
                 <LabelContainer>
                     <CalculateLabel> serwisowanie co 30 tysięcy km<span>[zł]</span> </CalculateLabel>
                     <InputNumber
@@ -96,7 +122,7 @@ const Oblicz = () => {
                     value={energyCost} onChange={e => setEnergyCost(e.target.value)} className="inputNumber"
                     placeholder="1000" type="number"></InputNumber></LabelContainer>
 
-                <span style={{color:"white"}}>Oblicz czas ładowania</span>
+                <span style={{color: "white"}}>Oblicz czas ładowania</span>
                 <LabelContainer>
                     <CalculateLabel> Moc ładowarki <span>[kW]</span></CalculateLabel> <InputNumber
                     value={chargePower} onChange={e => setChargePower(e.target.value)} className="inputNumber"
@@ -112,16 +138,17 @@ const Oblicz = () => {
                     value={electricalOutlet} onChange={e => setElectricalOutlet(e.target.value)} className="inputNumber"
                     placeholder="1000" type="number"></InputNumber></LabelContainer>
 
-                <input onClick={onSubmitClick} type="submit"></input>
-                <span style={{color:"white"}}>robisz rocznie {YearKm} Kilometry</span>
-                <span style={{color:"white"}}>serwisowanie co 30 tysięcy wynosi = {serviceCost}zł</span>
-                <span style={{color:"white"}}>Wymiana opon rocznie = {TiresSwap}</span>
-                <span style={{color:"white"}}>Wymiana akumulatora rocznie bedzie kosztowac {batteryYearCost}</span>
-                <span style={{color:"white"}}>Koszt prądu wynosi {EnergyYearCost}</span>
-                <span style={{color:"white"}}>Roczny koszt wyniesie {YearCost} zł</span>
-                <span style={{color:"white"}}>Koszt jednego kilometra to {OneKmCost.toFixed(2)}zł</span>
-                <span style={{color:"white"}}>czas ładowania to </span>
-                <span style={{color:"white"}}>koszt jednego ładowania to </span>
+                <input onClick={onSubmitClick} disabled={disable} type="submit"></input>
+                <h1>{error}</h1>
+                <span style={{color: "white"}}>robisz rocznie {YearKm} Kilometry</span>
+                <span style={{color: "white"}}>serwisowanie co 30 tysięcy wynosi = {serviceCost}zł</span>
+                <span style={{color: "white"}}>Wymiana opon rocznie = {TiresSwap}</span>
+                <span style={{color: "white"}}>Wymiana akumulatora rocznie bedzie kosztowac {batteryYearCost}</span>
+                <span style={{color: "white"}}>Koszt prądu wynosi {EnergyYearCost}</span>
+                <span style={{color: "white"}}>Roczny koszt wyniesie {YearCost} zł</span>
+                <span style={{color: "white"}}>Koszt jednego kilometra to {OneKmCost.toFixed(2)}zł</span>
+                <span style={{color: "white"}}>czas ładowania to </span>
+                <span style={{color: "white"}}>koszt jednego ładowania to </span>
 
             </FormStyle>
         </ObliczContainer>

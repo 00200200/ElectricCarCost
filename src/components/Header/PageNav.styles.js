@@ -1,4 +1,4 @@
-// import styled from 'styled-components';
+import styled from 'styled-components';
 // export const DivStyled = styled.div`
 // background-color:#ffffff;
 //   height:80px;
@@ -16,3 +16,8 @@
 //   width:250px;
 // height:100vh;
 // `
+// Wazne zeby pierwsza litera była duża
+export const H1Styled = styled.h1`
+font-size:30rem;    
+
+`

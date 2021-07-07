@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 
 export const MapContainer = styled.div`
-width:90vw
-  background:
+width:90vw;
+  background:black;
 `
 export const MapStyled = styled.div`
+  background:black;
   display:flex;
   justify-content:center;
   flex-direction:column;
@@ -15,7 +16,9 @@ export const MapStyled = styled.div`
   
 `
 export const H1Styled = styled.h1`
-  margin:1rem;
+
+  margin:7rem;
     font-size:2rem;
   font-weight:bold;
+  color:white;
     `
