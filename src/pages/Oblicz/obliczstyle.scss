@@ -4,4 +4,8 @@
   border-bottom: 1px solid black;
   width:15%;
   text-align:right;
+  background:none;
+  &placeholder {
+    color: white;
+  }
 }

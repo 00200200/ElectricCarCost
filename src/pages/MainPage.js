@@ -1,13 +1,16 @@
 import React from 'react';
 import PageNav from "../components/Header/PageNav";
 import Map from "../components/Map/Map";
-import Hero from "../components/Hero/Hero"
+import Footer from "../components/Footer/footer";
+import Main from "../components/MainBodyUnderHeader/Main";
+
 const MainPage = () => {
     return (
        <>
        <PageNav/>
-          <Hero></Hero>
+       <Main></Main>
            <Map/>
+           <Footer/>
        </>
     );
 };

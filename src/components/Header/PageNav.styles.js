@@ -17,7 +17,7 @@ import styled from 'styled-components';
 // height:100vh;
 // `
 // Wazne zeby pierwsza litera była duża
-export const H1Styled = styled.h1`
-font-size:30rem;    
-
-`
+// export const H1Styled = styled.h1`
+// font-size:30rem;
+//
+// `

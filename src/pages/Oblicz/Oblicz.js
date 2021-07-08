@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import Map from "../../components/Map/Map";
 import PageNav from "../../components/Header/PageNav";
-import {ObliczContainer} from "./Oblicz.styles.js";
+import {CalculateInputSubmit, H1Alert, ObliczContainer} from "./Oblicz.styles.js";
 import {FormStyle, CalculateLabel, LabelContainer, InputNumber, ImgStyles} from "./Oblicz.styles.js";
 import "./obliczstyle.scss"
 import photo from "../assets/images/Background.png"
+import {Link} from "react-router-dom";
 
 const Oblicz = () => {
     const [name, setName] = useState("")
@@ -21,6 +22,14 @@ const Oblicz = () => {
     const [informations, setInformations] = useState([])
     const [disable, setDisable] = useState(true)
     const [error, setError] = useState("")
+    const [form, setForm] = useState({
+        name: '',
+        kmMonth: '',
+        yearCost: '',
+        variableServiceYearCost: '',
+        variableTireYearCost: '',
+        batteryChange: '',
+    })
 
 
     const YearKm = kmMonth * 12
@@ -35,7 +44,6 @@ const Oblicz = () => {
         {  setDisable(false)
  setError("")
         }
-
         else {setError("Wypełnij wszystkie pola")}
     })
 
@@ -138,8 +146,8 @@ const Oblicz = () => {
                     value={electricalOutlet} onChange={e => setElectricalOutlet(e.target.value)} className="inputNumber"
                     placeholder="1000" type="number"></InputNumber></LabelContainer>
 
-                <input onClick={onSubmitClick} disabled={disable} type="submit"></input>
-                <h1>{error}</h1>
+              <CalculateInputSubmit onClick={onSubmitClick} disabled={disable} type="submit"></CalculateInputSubmit>
+                <H1Alert>{error}</H1Alert>
                 <span style={{color: "white"}}>robisz rocznie {YearKm} Kilometry</span>
                 <span style={{color: "white"}}>serwisowanie co 30 tysięcy wynosi = {serviceCost}zł</span>
                 <span style={{color: "white"}}>Wymiana opon rocznie = {TiresSwap}</span>

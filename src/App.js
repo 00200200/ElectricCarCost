@@ -12,7 +12,7 @@ function App() {
 
         <Router>
 
-            <div style={{width: "100%",background:"black"}}>
+            <div style={{width: "100%",background:"#f6f6f6"}}>
                 <Switch>
                     <Route exact path='/' component={MainPage}/>
                     <Route exact path='/Oblicz' component={Oblicz}/>
