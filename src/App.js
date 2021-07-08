@@ -9,9 +9,7 @@ import Porównaj from './pages/Porównaj/Porównaj'
 // import Map from "./components/Map/Map"
 function App() {
     return (
-
         <Router>
-
             <div style={{width: "100%",background:"#f6f6f6"}}>
                 <Switch>
                     <Route exact path='/' component={MainPage}/>

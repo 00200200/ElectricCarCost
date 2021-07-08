@@ -1,11 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import Map from "../../components/Map/Map";
 import PageNav from "../../components/Header/PageNav";
-import {CalculateInputSubmit, H1Alert, ObliczContainer} from "./Oblicz.styles.js";
+import {
+    CalculateInputSubmit,
+    CalculateSelectTypeContainer,
+    H1Alert, H1Calculate,
+    ObliczContainer, SelectTypeContainer, SelectTypeP
+} from "./Oblicz.styles.js";
 import {FormStyle, CalculateLabel, LabelContainer, InputNumber, ImgStyles} from "./Oblicz.styles.js";
 import photo from "../assets/images/Background.png"
 import {Link} from "react-router-dom";
 import Footer from "../../components/Footer/footer";
+import {AiFillCar, AiOutlineCar} from "react-icons/all";
 
 const Oblicz = () => {
     const [name, setName] = useState("")
@@ -22,6 +28,18 @@ const Oblicz = () => {
     const [informations, setInformations] = useState([])
     const [disable, setDisable] = useState(true)
     const [error, setError] = useState("")
+    // AUTO ELEKTRYCZNE
+    const [isHidden,setIsHidden] = useState(true)
+    const [combustionIsHideen,setCombustionIsHidden] = useState(false)
+// AUTO SPALINOWE
+    const [combustionCarName,setCombustionCarName] = useState("")
+    const [combustionKmMonth,setCombustionKmMonth] = useState("")
+    const [combustionYearCost,setCombustionYearCost] = useState("")
+    const [combustionVariableServiceYearCost,setCombustionVariableServiceYearCost] = useState("")
+    const [combustionVariableTireYearCost,setCombustionVariableTireYearCost] = useState("")
+    const [combustionConsumption,setCombustionConsumption] = useState("")
+    const [fuelCost,setFuelCost] = useState("")
+    const [combustionInfo,setCombustionInfo] = useState([])
 
 
     const YearKm = kmMonth * 12
@@ -38,6 +56,33 @@ const Oblicz = () => {
         }
         else {setError("Wypełnij wszystkie pola")}
     })
+
+    const CombustionYearKm = combustionKmMonth * 12;
+    const CombustionTiresSwap = ((combustionVariableTireYearCost/50000)*CombustionYearKm)
+    const CombustionServiceCost = ((variableServiceYearCost / 30000) *CombustionYearKm)
+    const FuelCost = (((combustionConsumption*CombustionYearKm)/100) * fuelCost)
+    const CombustionYearCost = CombustionTiresSwap + CombustionServiceCost + FuelCost + combustionYearCost
+    const CombustionOneKmCost = CombustionYearCost / CombustionYearKm;
+    const CombustionOnSubmit = (e) => {
+        e.preventDefault()
+        setCombustionInfo([...combustionInfo,{
+            NAME:combustionCarName,
+            YEARKM:CombustionYearKm,
+            TIRESWAP:CombustionTiresSwap,
+            SERVICECOST:CombustionServiceCost,
+            FUELCOST:FuelCost,
+            YEARCOST:CombustionYearCost,
+            ONEKMCOST:CombustionOneKmCost,
+        }])
+        setCombustionCarName("")
+        setCombustionKmMonth("")
+        setCombustionYearCost("")
+        setCombustionVariableTireYearCost("")
+        setCombustionVariableServiceYearCost("")
+        setCombustionConsumption("")
+        setFuelCost("")
+
+    }
 
     const onSubmitClick = (e) => {
         e.preventDefault()
@@ -65,18 +110,40 @@ const Oblicz = () => {
         setElectricalOutlet("")
         localStorage.setItem('costInfo', JSON.stringify(informations))
         // JSON.parse(localStorage.getItem('costInfo'))
+    }
 
-
+    const setHiddenElectric = () => {
+        setIsHidden(false)
+        setCombustionIsHidden(true)
+    }
+    const setHiddenConsumbtion = () =>{
+        setIsHidden(true)
+        setCombustionIsHidden(false)
     }
 
 
     return (
-        <>
+<>
+        <PageNav/>
         <ObliczContainer>
-            <PageNav/>
-            <FormStyle>
-                <ImgStyles src={photo}></ImgStyles>
-                <h1 style={{color: "white"}}>Oblicz koszt utrzymania oraz czas ładowania elektrycznego samochodu</h1>
+
+            <CalculateSelectTypeContainer>
+                <SelectTypeContainer>  <AiFillCar onClick={setHiddenElectric} style={{fontSize:"5rem" , color:"#BADA55", cursor:"pointer"}}>
+                </AiFillCar>
+                    <SelectTypeP>AUTO <br></br>ELEKTRYCZNE</SelectTypeP>
+                </SelectTypeContainer>
+
+             <SelectTypeContainer>
+                 <AiOutlineCar onClick={setHiddenConsumbtion} style={{fontSize:"5rem" , color:"", cursor:"pointer"}}>
+
+             </AiOutlineCar>
+                 <SelectTypeP>AUTO<br></br> SPALINOWE</SelectTypeP>
+             </SelectTypeContainer>
+
+            </CalculateSelectTypeContainer>
+
+            <FormStyle style={isHidden?{display:"none"}:{display: "flex"}}>
+                <H1Calculate style={{color: "white"}}>Oblicz koszt utrzymania oraz czas ładowania elektrycznego samochodu</H1Calculate>
                 <span style={{color: "white"}}>Od ceny nie jest odliczany podatek</span>
                 <LabelContainer>
                     <CalculateLabel> Nazwa pojazdu </CalculateLabel><InputNumber
@@ -141,19 +208,47 @@ const Oblicz = () => {
 
               <CalculateInputSubmit onClick={onSubmitClick} disabled={disable} type="submit"></CalculateInputSubmit>
                 <H1Alert>{error}</H1Alert>
-                <span style={{color: "white"}}>robisz rocznie {YearKm} Kilometry</span>
-                <span style={{color: "white"}}>serwisowanie co 30 tysięcy wynosi = {serviceCost}zł</span>
-                <span style={{color: "white"}}>Wymiana opon rocznie = {TiresSwap}</span>
-                <span style={{color: "white"}}>Wymiana akumulatora rocznie bedzie kosztowac {batteryYearCost}</span>
-                <span style={{color: "white"}}>Koszt prądu wynosi {EnergyYearCost}</span>
-                <span style={{color: "white"}}>Roczny koszt wyniesie {YearCost} zł</span>
-                <span style={{color: "white"}}>Koszt jednego kilometra to {OneKmCost.toFixed(2)}zł</span>
-                <span style={{color: "white"}}>czas ładowania to </span>
-                <span style={{color: "white"}}>koszt jednego ładowania to </span>
+            </FormStyle>
+            <FormStyle style={combustionIsHideen?{display:"none"}:{display: "flex"}}>
+<H1Calculate>Oblicz koszt utrzymania samochodu spalinowego</H1Calculate>
+                <LabelContainer>
+                    <CalculateLabel>Nazwa pojazdu <span>[km]</span></CalculateLabel> <InputNumber
+                    value={combustionCarName} onChange={e => setCombustionCarName(e.target.value)} className="inputNumber"
+                    placeholder="Volkswagen Scirocco" type="text"></InputNumber>
+                </LabelContainer>
+                <LabelContainer>
+                    <CalculateLabel>Ile kilometrów robisz miesięcznie <span>[km]</span></CalculateLabel> <InputNumber
+                    value={combustionKmMonth} onChange={e => setCombustionKmMonth(e.target.value)} className="inputNumber"
+                    placeholder="2500" type="number"></InputNumber>
+                </LabelContainer>
+                <LabelContainer>
+                    <CalculateLabel> Koszty stałe roczne (ubezpieczenie,przegląd obowiązkowy) <span>[zł]</span></CalculateLabel> <InputNumber
+                    value={combustionYearCost} onChange={e => setCombustionYearCost(e.target.value)} className="inputNumber"
+                    placeholder="4000" type="number"></InputNumber>
+                </LabelContainer>
+                <LabelContainer>
+                    <CalculateLabel>serwisowanie co 30 tysięcy km <span>[zł]</span></CalculateLabel> <InputNumber
+                    value={combustionVariableServiceYearCost} onChange={e => setCombustionVariableServiceYearCost(e.target.value)} className="inputNumber"
+                    placeholder="2500" type="number"></InputNumber>
+                </LabelContainer>   <LabelContainer>
+                    <CalculateLabel>wymiana opon co 50 tysięcy km <span>[zł]</span></CalculateLabel> <InputNumber
+                    value={combustionVariableTireYearCost} onChange={e => setCombustionVariableTireYearCost(e.target.value)} className="inputNumber"
+                    placeholder="2000" type="number"></InputNumber>
+                </LabelContainer>   <LabelContainer>
+                    <CalculateLabel>Spalanie na 100 km <span>[litr]</span></CalculateLabel> <InputNumber
+                    value={combustionConsumption} onChange={e => setCombustionConsumption(e.target.value)} className="inputNumber"
+                    placeholder="8" type="text"></InputNumber>
+                </LabelContainer> <LabelContainer>
+                    <CalculateLabel>Cena paliwa  za litr<span>[litr]</span></CalculateLabel> <InputNumber
+                    value={fuelCost} onChange={e => setFuelCost(e.target.value)} className="inputNumber"
+                    placeholder="5,55" type="number"></InputNumber>
+                </LabelContainer>
+                <CalculateInputSubmit onClick={CombustionOnSubmit} disabled={disable} type="submit"></CalculateInputSubmit>
 
             </FormStyle>
         </ObliczContainer>
         <Footer></Footer>
+
 </>
     );
 };

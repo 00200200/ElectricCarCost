@@ -11,7 +11,7 @@ const Porównaj = () => {
         return (<>
                 <PageNav/>
                 <ListContainer>
-                    <h1>Dodaj produkty</h1>
+                    <h1 style={{color:"white"}}>Dodaj produkty</h1>
                 </ListContainer>
 
                 <Footer></Footer>
@@ -21,6 +21,7 @@ const Porównaj = () => {
     return (
        <><PageNav/>
            <ListContainer>
+               <h1>Samochody Elektryczne</h1>
            {
            AllCostInfo.map((item) => {
                return (<>
@@ -41,6 +42,7 @@ const Porównaj = () => {
            })
            }</ListContainer> <Footer></Footer></>
     )
+
 };
 
 export default Porównaj;

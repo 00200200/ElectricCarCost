@@ -1,9 +1,30 @@
 import styled from 'styled-components'
 
 export const ObliczContainer = styled.div`
-    width:100%;
+  width:100%;
   margin:0 auto;
+  height:100%;
 background-color:#606060;
+`
+export const SelectTypeP = styled.div`
+font-size:2rem;
+  font-weight:bold;
+  color:black;
+`
+export const CalculateSelectTypeContainer = styled.div`
+display:flex;
+  margin:0 auto;
+  text-align:center;
+  justify-content:center;
+  width:90vw;
+  @media screen and (max-width:420px){
+    display:block;
+    margin:0 auto;
+  padding-top:1rem;
+  }
+`
+export const SelectTypeContainer = styled.div`
+    margin:2rem;
 `
 export const FormStyle = styled.form`
     display:flex;
@@ -24,12 +45,17 @@ export const LabelContainer = styled.div`
   border:1px solid black;
   border-radius:15px;
  color:white;
+  @media screen and (max-width:420px) {
+    width:90vw;
+  }
+  
 `
 export const CalculateLabel = styled.label`
   width:60%;
   padding:0.2rem;
 display: flex;
-  justify-content:space-between
+  justify-content:space-between;
+ 
 `
 export const InputNumber = styled.input` 
   border:none;
@@ -73,3 +99,10 @@ export const CalculateInputSubmit = styled.input`
     background:${({primary}) => (primary ? '#fff' : '#BADA55')}
   }
     `
+
+export const H1Calculate = styled.h1 `
+font-size:2rem;
+  color:white;
+  font-weight:bold;
+ text-align:center;
+`
