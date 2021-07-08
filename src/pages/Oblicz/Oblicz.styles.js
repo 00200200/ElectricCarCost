@@ -23,7 +23,6 @@ export const LabelContainer = styled.div`
   margin:5px;
   border:1px solid black;
   border-radius:15px;
-  padding:0.2rem;
  color:white;
 `
 export const CalculateLabel = styled.label`

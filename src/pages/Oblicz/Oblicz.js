@@ -3,9 +3,9 @@ import Map from "../../components/Map/Map";
 import PageNav from "../../components/Header/PageNav";
 import {CalculateInputSubmit, H1Alert, ObliczContainer} from "./Oblicz.styles.js";
 import {FormStyle, CalculateLabel, LabelContainer, InputNumber, ImgStyles} from "./Oblicz.styles.js";
-import "./obliczstyle.scss"
 import photo from "../assets/images/Background.png"
 import {Link} from "react-router-dom";
+import Footer from "../../components/Footer/footer";
 
 const Oblicz = () => {
     const [name, setName] = useState("")
@@ -22,14 +22,6 @@ const Oblicz = () => {
     const [informations, setInformations] = useState([])
     const [disable, setDisable] = useState(true)
     const [error, setError] = useState("")
-    const [form, setForm] = useState({
-        name: '',
-        kmMonth: '',
-        yearCost: '',
-        variableServiceYearCost: '',
-        variableTireYearCost: '',
-        batteryChange: '',
-    })
 
 
     const YearKm = kmMonth * 12
@@ -79,6 +71,7 @@ const Oblicz = () => {
 
 
     return (
+        <>
         <ObliczContainer>
             <PageNav/>
             <FormStyle>
@@ -160,7 +153,8 @@ const Oblicz = () => {
 
             </FormStyle>
         </ObliczContainer>
-
+        <Footer></Footer>
+</>
     );
 };
 

@@ -8,7 +8,8 @@ import {
     FooterLinkTittle,
     FooterWrap
 } from "./footer.styles";
-
+const date = new Date()
+console.log(date.getFullYear())
 const Footer = () => {
     return (
         <FooterContainer>
@@ -58,7 +59,8 @@ const Footer = () => {
             </FooterWrap>
 
             <CopyRightContainer>
-                <CopyRightP>                &copy;  Logo
+                <CopyRightP>                &copy;  Logo {date.getFullYear()}
+
                 </CopyRightP>
             </CopyRightContainer>
         </FooterContainer>
