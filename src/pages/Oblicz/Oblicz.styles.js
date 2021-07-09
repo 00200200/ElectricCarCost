@@ -53,15 +53,22 @@ export const LabelContainer = styled.div`
 export const CalculateLabel = styled.label`
   width:60%;
   padding:0.2rem;
+  font-weight:bold;
 display: flex;
   justify-content:space-between;
  
 `
 export const InputNumber = styled.input` 
   border:none;
+  background:none;
   border-bottom: 1px solid black;
   width:40%;
+  padding:0.5rem;
   text-align:right;
+  font-weight:bold;
+  ::placeholder{
+    color:white;
+  }
 `
 
 export const ImgStyles = styled.img `

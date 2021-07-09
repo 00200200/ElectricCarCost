@@ -47,7 +47,7 @@ const Oblicz = () => {
     const serviceCost = ((variableServiceYearCost / 30000) * YearKm)
     const batteryYearCost = ((batteryChange / 250000) * YearKm)
     const EnergyYearCost = (((energyConsumption * YearKm) / 100) * energyCost)
-    const YearCost = TiresSwap + serviceCost + batteryYearCost + EnergyYearCost
+    const YearCost = TiresSwap + serviceCost + batteryYearCost + EnergyYearCost  +parseInt(yearCost)
     const OneKmCost = YearCost / YearKm
     useEffect(() => {
         if (name != "" && kmMonth != "" && yearCost != "" && variableServiceYearCost != "" && variableTireYearCost != "" && batteryChange != "" && energyCost != "" && energyConsumption != "")
@@ -59,13 +59,13 @@ const Oblicz = () => {
 
     const CombustionYearKm = combustionKmMonth * 12;
     const CombustionTiresSwap = ((combustionVariableTireYearCost/50000)*CombustionYearKm)
-    const CombustionServiceCost = ((variableServiceYearCost / 30000) *CombustionYearKm)
+    const CombustionServiceCost = ((combustionVariableServiceYearCost / 30000) *CombustionYearKm)
     const FuelCost = (((combustionConsumption*CombustionYearKm)/100) * fuelCost)
-    const CombustionYearCost = CombustionTiresSwap + CombustionServiceCost + FuelCost + combustionYearCost
+    const CombustionYearCost = CombustionTiresSwap + CombustionServiceCost + FuelCost + parseInt(combustionYearCost)
     const CombustionOneKmCost = CombustionYearCost / CombustionYearKm;
     const CombustionOnSubmit = (e) => {
         e.preventDefault()
-        setCombustionInfo([...combustionInfo,{
+        setCombustionInfo(prev =>[...prev,{
             NAME:combustionCarName,
             YEARKM:CombustionYearKm,
             TIRESWAP:CombustionTiresSwap,
@@ -96,7 +96,6 @@ const Oblicz = () => {
             YEARCOST: YearCost ,
             ONEKMCOST: OneKmCost || 0
         }])
-        debugger
         setName("")
         setKmMonth("")
         setYearCost("")
@@ -114,10 +113,13 @@ const Oblicz = () => {
     useEffect(()=>{
         if(!informations){ return}
 
-
             localStorage.setItem('costInfo', JSON.stringify(informations))
         },[informations]
     )
+    useEffect( ()=>{
+        if(!combustionInfo){return}
+        localStorage.setItem('combustionInfo', JSON.stringify(combustionInfo))
+    })
 
     const setHiddenElectric = () => {
         setIsHidden(false)
@@ -190,12 +192,12 @@ const Oblicz = () => {
                 <LabelContainer>
                     <CalculateLabel> Zużycie pradu na 100km <span>[kWh]</span></CalculateLabel><InputNumber
                     value={energyConsumption} onChange={e => setEnergyConsumption(e.target.value)}
-                    className="inputNumber" placeholder="1000" type="number"></InputNumber>
+                    className="inputNumber" placeholder="25" type="number"></InputNumber>
                 </LabelContainer>
                 <LabelContainer>
                     <CalculateLabel> Cena pradu za 1kWh <span>[zł]</span></CalculateLabel> <InputNumber
                     value={energyCost} onChange={e => setEnergyCost(e.target.value)} className="inputNumber"
-                    placeholder="1000" type="number"></InputNumber></LabelContainer>
+                    placeholder="0.65" type="number"></InputNumber></LabelContainer>
 
                 <span style={{color: "white"}}>Oblicz czas ładowania</span>
                 <LabelContainer>
@@ -250,7 +252,7 @@ const Oblicz = () => {
                     value={fuelCost} onChange={e => setFuelCost(e.target.value)} className="inputNumber"
                     placeholder="5,55" type="number"></InputNumber>
                 </LabelContainer>
-                <CalculateInputSubmit onClick={CombustionOnSubmit} disabled={true} type="submit"></CalculateInputSubmit>
+                <CalculateInputSubmit onClick={CombustionOnSubmit}  type="submit"></CalculateInputSubmit>
 
             </FormStyle>
         </ObliczContainer>

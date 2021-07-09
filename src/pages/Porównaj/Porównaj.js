@@ -1,7 +1,8 @@
 import React from 'react';
 import PageNav from "../../components/Header/PageNav";
 import Footer from "../../components/Footer/footer";
-import {ListContainer} from "./Porównaj.styles";
+import {ECarContainer, H1StyledCar, H1Styled, ListContainer, UlStyled, LiStyled} from "./Porównaj.styles";
+import CompareCombustionCar from "./CompareCombustionCar";
 
 const Porównaj = () => {
     const AllCostInfo = JSON.parse(localStorage.getItem('costInfo'))
@@ -11,7 +12,7 @@ const Porównaj = () => {
         return (<>
                 <PageNav/>
                 <ListContainer>
-                    <h1 style={{color:"white"}}>Dodaj produkty</h1>
+                    <h1 style={{color: "white"}}>Dodaj produkty</h1>
                 </ListContainer>
 
                 <Footer></Footer>
@@ -19,56 +20,42 @@ const Porównaj = () => {
         )
     }
     return (
-       <><PageNav/>
-           <ListContainer>
-               <h1>Samochody Elektryczne</h1>
-           {
-           AllCostInfo.map(({NAME,YEARKM,TIRESWAP,SERVICECOST,BATTERYYEARCOST,ENERGYYEARCOST,YEARCOST,ONEKMCOST =0}) => {
-               return (<>
-                       <ul>
-                           <li>Nazwa: {NAME}</li>
-                           <li>Roczna ilość kilometrów {YEARKM} km</li>
-                           <li>Wymiana opon rocznie kosztuje {TIRESWAP} zł</li>
-                           <li>Serwisowanie rocznie kosztuje {SERVICECOST.toFixed(2)} zł</li>
-                           <li>Wymiana baterii rocznie kosztuje {BATTERYYEARCOST.toFixed(2)} zł</li>
-                           <li>Energia rocznie kosztuje {ENERGYYEARCOST.toFixed(2)} zł</li>
-                           <li>Razem roczny koszt wynosi {YEARCOST.toFixed(2)} zł</li>
-                           <li>Jeden kilometr kosztuje cię {ONEKMCOST.toFixed(2)} zł</li>
-                       </ul>
-                   </>
-               )
-           })
-           }</ListContainer>
-           <table>
-               <thead>
-               <tr>
-                   <td>Nazwa</td>
-                   <td>ROCZNA ILOSC KILOMETROW</td>
-                   <td>WYMIANA OPON ROCZNIE KOSZTUJE </td>
-                   <td>SERWISOWANIE ROCZNIE  </td>
-                   <td>WYMIANA BATERII ROCZNIE  </td>
-                   <td>ENERGIA ROCZNIE  </td>
-                   <td>RAZEM ROCZNY KOSZT  </td>
-                   <td>1km KOSZTUJE  </td>
-               </tr>
-               <tbody>
-               AllCostInfo.map(({NAME,YEARKM,TIRESWAP,SERVICECOST,BATTERYYEARCOST,ENERGYYEARCOST,YEARCOST,ONEKMCOST =0}) => {
-                   <tr>
-                       <td>{NAME}</td>
-                       <td>{YEAR}</td>
-                       <td>{TIRESWAP}</td>
-                       <td>{TIRESWAP}</td>
-                       <td>{SERVICECOST}</td>
-                       <td>{BATTERYYEARCOST}</td>
-                       <td>{ENERGYYEARCOST}</td>
-                       <td>{YEARCOST}</td>
-                       <td>{ONEKMCOST}</td>
-                   </tr>
-               }
-               </tbody>
-               </thead>
-           </table>
-           <Footer></Footer></>
+        <><PageNav/>
+            <ListContainer>
+                <H1Styled>Samochody Elektryczne</H1Styled>
+                {
+                    AllCostInfo.map(({
+                                         NAME,
+                                         YEARKM,
+                                         TIRESWAP,
+                                         SERVICECOST,
+                                         BATTERYYEARCOST,
+                                         ENERGYYEARCOST,
+                                         YEARCOST,
+                                         ONEKMCOST = 0
+                                     }) => {
+                        return (<>
+                                <ECarContainer>
+                                    <H1StyledCar>{NAME}</H1StyledCar>
+                                    <UlStyled>
+                                        <LiStyled>Roczna ilość kilometrów<div> <span>{YEARKM}</span>km </div></LiStyled>
+                                        <LiStyled>Wymiana opon rocznie kosztuje {TIRESWAP} zł</LiStyled>
+                                        <LiStyled>Serwisowanie rocznie kosztuje {SERVICECOST} zł</LiStyled>
+                                        <LiStyled>Wymiana baterii rocznie
+                                            kosztuje {BATTERYYEARCOST.toFixed(2)} zł</LiStyled>
+                                        <LiStyled>Energia rocznie kosztuje {ENERGYYEARCOST} zł</LiStyled>
+                                        <LiStyled>Razem roczny koszt wynosi {YEARCOST} zł</LiStyled>
+                                        <LiStyled>Jeden kilometr kosztuje cię {ONEKMCOST} zł</LiStyled>
+                                    </UlStyled>
+                                </ECarContainer>
+                            </>
+                        )
+                    })
+                }
+
+                <CompareCombustionCar/>
+            </ListContainer>
+            <Footer></Footer></>
     )
 
 };
