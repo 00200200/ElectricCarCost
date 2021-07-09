@@ -23,24 +23,52 @@ const Porównaj = () => {
            <ListContainer>
                <h1>Samochody Elektryczne</h1>
            {
-           AllCostInfo.map((item) => {
+           AllCostInfo.map(({NAME,YEARKM,TIRESWAP,SERVICECOST,BATTERYYEARCOST,ENERGYYEARCOST,YEARCOST,ONEKMCOST =0}) => {
                return (<>
-
                        <ul>
-                           <li>Nazwa: {item.NAME}</li>
-                           <li>Roczna ilość kilometrów {item.YEARKM} km</li>
-                           <li>Wymiana opon rocznie kosztuje {item.TIRESWAP} zł</li>
-                           <li>Serwisowanie rocznie kosztuje {item.SERVICECOST} zł</li>
-                           <li>Wymiana baterii rocznie kosztuje {item.BATTERYYEARCOST} zł</li>
-                           <li>Energia rocznie kosztuje {item.ENERGYYEARCOST} zł</li>
-                           <li>Razem roczny koszt wynosi {item.YEARCOST} zł</li>
-                           <li>Jeden kilometr kosztuje cię {item.ONEKMCOST} zł</li>
+                           <li>Nazwa: {NAME}</li>
+                           <li>Roczna ilość kilometrów {YEARKM} km</li>
+                           <li>Wymiana opon rocznie kosztuje {TIRESWAP} zł</li>
+                           <li>Serwisowanie rocznie kosztuje {SERVICECOST.toFixed(2)} zł</li>
+                           <li>Wymiana baterii rocznie kosztuje {BATTERYYEARCOST.toFixed(2)} zł</li>
+                           <li>Energia rocznie kosztuje {ENERGYYEARCOST.toFixed(2)} zł</li>
+                           <li>Razem roczny koszt wynosi {YEARCOST.toFixed(2)} zł</li>
+                           <li>Jeden kilometr kosztuje cię {ONEKMCOST.toFixed(2)} zł</li>
                        </ul>
-
                    </>
                )
            })
-           }</ListContainer> <Footer></Footer></>
+           }</ListContainer>
+           <table>
+               <thead>
+               <tr>
+                   <td>Nazwa</td>
+                   <td>ROCZNA ILOSC KILOMETROW</td>
+                   <td>WYMIANA OPON ROCZNIE KOSZTUJE </td>
+                   <td>SERWISOWANIE ROCZNIE  </td>
+                   <td>WYMIANA BATERII ROCZNIE  </td>
+                   <td>ENERGIA ROCZNIE  </td>
+                   <td>RAZEM ROCZNY KOSZT  </td>
+                   <td>1km KOSZTUJE  </td>
+               </tr>
+               <tbody>
+               AllCostInfo.map(({NAME,YEARKM,TIRESWAP,SERVICECOST,BATTERYYEARCOST,ENERGYYEARCOST,YEARCOST,ONEKMCOST =0}) => {
+                   <tr>
+                       <td>{NAME}</td>
+                       <td>{YEAR}</td>
+                       <td>{TIRESWAP}</td>
+                       <td>{TIRESWAP}</td>
+                       <td>{SERVICECOST}</td>
+                       <td>{BATTERYYEARCOST}</td>
+                       <td>{ENERGYYEARCOST}</td>
+                       <td>{YEARCOST}</td>
+                       <td>{ONEKMCOST}</td>
+                   </tr>
+               }
+               </tbody>
+               </thead>
+           </table>
+           <Footer></Footer></>
     )
 
 };

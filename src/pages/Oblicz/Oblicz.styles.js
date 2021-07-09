@@ -3,8 +3,8 @@ import styled from 'styled-components'
 export const ObliczContainer = styled.div`
   width:100%;
   margin:0 auto;
-  height:100%;
 background-color:#606060;
+  height:100%;
 `
 export const SelectTypeP = styled.div`
 font-size:2rem;
@@ -88,6 +88,7 @@ export const CalculateInputSubmit = styled.input`
   outline:none;
   border:none;
   cursor:pointer;
+  margin:1rem;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -95,7 +96,7 @@ export const CalculateInputSubmit = styled.input`
   text-decoration: none;
   &:hover {
     transition:all 0.2s ease-in-out;
-    color:black;
+    color:${({disabled}) => (disabled ? 'red' : 'blue')};
     background:${({primary}) => (primary ? '#fff' : '#BADA55')}
   }
     `

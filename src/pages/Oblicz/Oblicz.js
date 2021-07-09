@@ -86,16 +86,17 @@ const Oblicz = () => {
 
     const onSubmitClick = (e) => {
         e.preventDefault()
-        setInformations([...informations,{
+        setInformations(prev => [...prev ,{
             NAME: name,
             YEARKM: YearKm,
             TIRESWAP: TiresSwap,
             SERVICECOST: serviceCost,
             BATTERYYEARCOST: batteryYearCost,
             ENERGYYEARCOST: EnergyYearCost,
-            YEARCOST: YearCost,
-            ONEKMCOST: OneKmCost
+            YEARCOST: YearCost ,
+            ONEKMCOST: OneKmCost || 0
         }])
+        debugger
         setName("")
         setKmMonth("")
         setYearCost("")
@@ -108,9 +109,15 @@ const Oblicz = () => {
         setChargePower("")
         setChargerCapacity("")
         setElectricalOutlet("")
-        localStorage.setItem('costInfo', JSON.stringify(informations))
         // JSON.parse(localStorage.getItem('costInfo'))
     }
+    useEffect(()=>{
+        if(!informations){ return}
+
+
+            localStorage.setItem('costInfo', JSON.stringify(informations))
+        },[informations]
+    )
 
     const setHiddenElectric = () => {
         setIsHidden(false)
@@ -243,7 +250,7 @@ const Oblicz = () => {
                     value={fuelCost} onChange={e => setFuelCost(e.target.value)} className="inputNumber"
                     placeholder="5,55" type="number"></InputNumber>
                 </LabelContainer>
-                <CalculateInputSubmit onClick={CombustionOnSubmit} disabled={disable} type="submit"></CalculateInputSubmit>
+                <CalculateInputSubmit onClick={CombustionOnSubmit} disabled={true} type="submit"></CalculateInputSubmit>
 
             </FormStyle>
         </ObliczContainer>
