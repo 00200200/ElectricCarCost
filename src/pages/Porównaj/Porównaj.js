@@ -6,7 +6,6 @@ import CompareCombustionCar from "./CompareCombustionCar";
 
 const Porównaj = () => {
     const AllCostInfo = JSON.parse(localStorage.getItem('costInfo'))
-    console.log(AllCostInfo)
 
     if (AllCostInfo === null) {
         return (<>
@@ -22,7 +21,7 @@ const Porównaj = () => {
     return (
         <><PageNav/>
             <ListContainer>
-                <H1Styled>Samochody Elektryczne</H1Styled>
+                <H1Styled>Samochody Elektryczne{console.log(AllCostInfo)}</H1Styled>
                 {
                     AllCostInfo.map(({
                                          NAME,
@@ -38,11 +37,10 @@ const Porównaj = () => {
                                 <ECarContainer>
                                     <H1StyledCar>{NAME}</H1StyledCar>
                                     <UlStyled>
-                                        <LiStyled>Roczna ilość kilometrów<div> <span>{YEARKM}</span>km </div></LiStyled>
+                                        <LiStyled>Roczna ilość kilometrów {YEARKM} km </LiStyled>
                                         <LiStyled>Wymiana opon rocznie kosztuje {TIRESWAP} zł</LiStyled>
                                         <LiStyled>Serwisowanie rocznie kosztuje {SERVICECOST} zł</LiStyled>
-                                        <LiStyled>Wymiana baterii rocznie
-                                            kosztuje {BATTERYYEARCOST.toFixed(2)} zł</LiStyled>
+                                        <LiStyled>Wymiana baterii rocznie kosztuje {BATTERYYEARCOST} zł</LiStyled>
                                         <LiStyled>Energia rocznie kosztuje {ENERGYYEARCOST} zł</LiStyled>
                                         <LiStyled>Razem roczny koszt wynosi {YEARCOST} zł</LiStyled>
                                         <LiStyled>Jeden kilometr kosztuje cię {ONEKMCOST} zł</LiStyled>

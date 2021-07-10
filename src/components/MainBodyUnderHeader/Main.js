@@ -21,7 +21,7 @@ const Main = () => {
     return (
         <MainContainer>
        <MainBg>
-           <VideoBg autoPlay muted src={Video}></VideoBg>
+           <VideoBg autoPlay loop muted src={Video}></VideoBg>
        </MainBg>
             <MainContent>
             <MainH1>Bądź Eco zainwestuj w przyszłość</MainH1>

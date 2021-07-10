@@ -46,6 +46,6 @@ const CompareCombustionCar = () => {
             })
         }</>
     );
-};
+}
 
 export default CompareCombustionCar;
