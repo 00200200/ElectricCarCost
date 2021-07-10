@@ -60,6 +60,9 @@ const Oblicz = () => {
             setError("Wypełnij wszystkie pola")
         }
     })
+    useEffect(()=>{
+
+    })
 
     const CombustionYearKm = combustionKmMonth * 12;
     const CombustionTiresSwap = ((combustionVariableTireYearCost / 50000) * CombustionYearKm)
@@ -69,7 +72,7 @@ const Oblicz = () => {
     const CombustionOneKmCost = CombustionYearCost / CombustionYearKm;
     const CombustionOnSubmit = (e) => {
         e.preventDefault()
-        setCombustionInfo(prev => [...prev, {
+        setCombustionInfo( [ {
             NAME: combustionCarName,
             YEARKM: CombustionYearKm,
             TIRESWAP: CombustionTiresSwap,
@@ -116,37 +119,38 @@ const Oblicz = () => {
     }
 
     useEffect(() => {
-        let AllCostInfo = JSON.parse(localStorage.getItem('costInfo'))
-        console.log(informations)
-        if (informations ===null) {
-            return
-        }
-        if(AllCostInfo === null) {
-            AllCostInfo = [...informations]
-            return localStorage.setItem('costInfo',JSON.stringify(AllCostInfo))
-        }
-        if(AllCostInfo.length > 0){
-            AllCostInfo = [...AllCostInfo,...informations]
-            console.log(AllCostInfo)
-            return localStorage.setItem('costInfo',JSON.stringify(AllCostInfo))
-        }
-        localStorage.setItem('costInfo', JSON.stringify(informations))
-            }, [informations]
+            let AllCostInfo = JSON.parse(localStorage.getItem('costInfo'))
+            console.log(informations)
+            if (informations === null) {
+                return
+            }
+            if (AllCostInfo === null) {
+                AllCostInfo = [...informations]
+                return localStorage.setItem('costInfo', JSON.stringify(AllCostInfo))
+            }
+            if (AllCostInfo.length > 0) {
+                AllCostInfo = [...AllCostInfo, ...informations]
+                console.log(AllCostInfo)
+                return localStorage.setItem('costInfo', JSON.stringify(AllCostInfo))
+            }
+            localStorage.setItem('costInfo', JSON.stringify(informations))
+        }, [informations]
     )
 
     useEffect(() => {
         let AllCombustionInfo = JSON.parse(localStorage.getItem('combustionInfo'))
-        if (combustionInfo ===null){
+        console.log(combustionInfo)
+        if (combustionInfo === null) {
             return
         }
-        if(AllCombustionInfo === null){
+        if (AllCombustionInfo === null) {
             AllCombustionInfo = [...combustionInfo]
         }
-        if(AllCombustionInfo.length>0){
-            AllCombustionInfo = [...AllCombustionInfo,combustionInfo]
-            return localStorage.setItem('combustionInfo',JSON.stringify(AllCombustionInfo))
+        if (AllCombustionInfo.length > 0) {
+            AllCombustionInfo = [...AllCombustionInfo, ...combustionInfo]
+            return localStorage.setItem('combustionInfo', JSON.stringify(AllCombustionInfo))
         }
-        localStorage.setItem('combustionInfo',JSON.stringify(combustionInfo))
+        localStorage.setItem('combustionInfo', JSON.stringify(combustionInfo))
     })
 
 
@@ -295,7 +299,7 @@ const Oblicz = () => {
                     value={fuelCost} onChange={e => setFuelCost(e.target.value)} className="inputNumber"
                     placeholder="5,55" type="number"></InputNumber>
                 </LabelContainer>
-                    <CalculateInputSubmit onClick={CombustionOnSubmit} disabled={disable}
+                    <CalculateInputSubmit onClick={CombustionOnSubmit}
                                           type="submit"></CalculateInputSubmit>
 
                 </FormStyle>

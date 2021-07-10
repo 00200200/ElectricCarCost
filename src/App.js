@@ -10,7 +10,7 @@ import Porównaj from './pages/Porównaj/Porównaj'
 function App() {
     return (
         <Router>
-            <div style={{width: "100%",background:"#f6f6f6"}}>
+            <div style={{width: "100%",background:"gray"}}>
                 <Switch>
                     <Route exact path='/' component={MainPage}/>
                     <Route exact path='/Oblicz' component={Oblicz}/>

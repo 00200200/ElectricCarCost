@@ -3,6 +3,8 @@ import PageNav from "../../components/Header/PageNav";
 import Footer from "../../components/Footer/footer";
 import {ECarContainer, H1StyledCar, H1Styled, ListContainer, UlStyled, LiStyled} from "./Porównaj.styles";
 import CompareCombustionCar from "./CompareCombustionCar";
+import {Button} from "../../components/MainBodyUnderHeader/Main.styles";
+import {Link} from "react-router-dom";
 
 const Porównaj = () => {
     const AllCostInfo = JSON.parse(localStorage.getItem('costInfo'))
@@ -11,9 +13,10 @@ const Porównaj = () => {
         return (<>
                 <PageNav/>
                 <ListContainer>
-                    <h1 style={{color: "white"}}>Dodaj produkty</h1>
+                    <H1Styled style={{color: "white"}}>Dodaj produkty</H1Styled>
+                    <Link to="/Oblicz"><Button style={{margin:"0 auto" ,textDecoration:"none"}}>Oblicz</Button></Link>
                 </ListContainer>
-
+                <CompareCombustionCar/>
                 <Footer></Footer>
             </>
         )

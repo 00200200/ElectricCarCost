@@ -15,7 +15,6 @@ const CompareCombustionCar = () => {
     return (<>
             <div style={{}}>
             <H1Styled>Samochody Spalinowe</H1Styled>
-            <Link to="/Oblicz"><Button>Dodaj</Button></Link>
             </div>
             {
             CombustionAllCostInfo.map(({

@@ -4,16 +4,29 @@ import styled from 'styled-components'
 
 export const ListContainer = styled.div`
     background-color:gray;
-  height:100vh;
+  height:100%;
+  width:100%;
+  padding:2rem;
+  @media screen and (max-width:500px) {
+padding:0;
+}
 
-    `
+`
 export const ECarContainer = styled.div`
     width:50vw;
-  margin:0 auto;
+  margin:2rem auto;
   text-align:center;
   text-decoration:none;
   list-style:none;
    background-color:#004242;
+border-radius: 3rem;
+  padding:2rem;
+  @media screen and (max-width:500px) {
+    width: 100%;
+    text-align:justify-all;
+    margin:0;
+    padding:0
+  }  
     `
 
 export const H1Styled = styled.h1`
@@ -27,6 +40,11 @@ export const H1StyledCar = styled.h1`
     font-size:2rem;
   font-weight:bold;
   color:white;
+  @media screen and (max-width:500px) {
+    text-align:justify-all;
+    margin:0;
+    padding:0
+  }
   `
 
 export const UlStyled = styled.ul `
@@ -36,16 +54,29 @@ list-style:none;
 
 export const LiStyled = styled.li`
     font-size:1.2rem;
+  margin:0.5rem;
   color:white;
   display:flex;
   justify-content:space-between;
+  
     `
 
 export const CombustionCarContainer = styled.div`
   width:50vw;
-  margin:0 auto;
+  margin:2rem auto;
   text-align:center;
   text-decoration:none;
   list-style:none;
   background-color:#1C1C21;
-    `
+  border-radius: 3rem;
+  padding:2rem;
+  margin-bottom:0;
+  @media screen and (max-width:500px) {
+  width: 100%;
+  text-align:justify-all;
+  margin:0;
+  padding:0
+}
+
+
+`
