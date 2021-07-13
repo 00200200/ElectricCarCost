@@ -28,7 +28,12 @@ const Main = () => {
             <MainP>Oblicz koszt utrzymaania elektrycznego pojazdu</MainP>
             <MainBtnWrapper>
                 <Link  style={{textDecoration:"none"}}to='/Oblicz'>
-                <Button onMouseEnter={onHover} onMouseLeave={onHover} to="/Oblicz">
+                <Button
+                    primary='true'
+                    dark='true'
+                    color='true'
+                    padding='true'
+                    onMouseEnter={onHover}   onMouseLeave={onHover} to="/Oblicz">
                     Oblicz {hover ? <ArrowForward /> : <ArrowRight/>}
 
                 </Button>

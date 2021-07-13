@@ -14,7 +14,7 @@ const Porównaj = () => {
                 <PageNav/>
                 <ListContainer>
                     <H1Styled style={{color: "white"}}>Dodaj produkty</H1Styled>
-                    <Link to="/Oblicz"><Button style={{margin:"0 auto" ,textDecoration:"none"}}>Oblicz</Button></Link>
+                    <Link style={{textDecoration:"none"}} to="/Oblicz"><Button style={{margin:"0 auto" ,textDecoration:"none"}}>Oblicz</Button></Link>
                 </ListContainer>
                 <CompareCombustionCar/>
                 <Footer></Footer>

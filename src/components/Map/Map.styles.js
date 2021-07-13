@@ -5,7 +5,7 @@ export const MapContainer = styled.div`
   background: #f6f6f6;
 `
 export const MapStyled = styled.div`
-  background: #f6f6f6;
+  background: gray;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -14,10 +14,9 @@ export const MapStyled = styled.div`
   height: auto;
   margin: 4rem auto;
 
-
 `
 export const H1Styled = styled.h1`
-
+background:gray;
   margin: 1rem;
   font-size: 2rem;
   font-weight: bold;

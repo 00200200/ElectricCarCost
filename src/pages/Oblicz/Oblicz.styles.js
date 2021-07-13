@@ -85,29 +85,30 @@ export const H1Alert = styled.h1`
     `
 
 export const CalculateInputSubmit = styled.input`
-    border-radius:50px;
-  background:${({primary}) => (primary ? '#01BG71' : '#010606')
-};
-  white-space:nowrap;
-  padding:${({big}) => (big ? '14 48px' : '12px 30px')};
-  color: ${({dark}) => (dark ? '#010606' : '#fff')};
-  font-size: ${({fontBig}) => (fontBig ? '20px' : '16px')};
-  outline:none;
-  border:none;
-  cursor:pointer;
-  margin:1rem;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  transition:all 0.2s ease-in-out;
-  text-decoration: none;
-  &:hover {
-    transition:all 0.2s ease-in-out;
-    color:${({disabled}) => (disabled ? 'red' : 'blue')};
-    background:${({primary}) => (primary ? '#fff' : '#BADA55')}
-  }
-    `
 
+  border-radius: 50px;
+  background: #010606;
+  white-space: nowrap;
+  padding: 12px 30px;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  margin: 1rem;
+
+  &:hover {
+    transition: all 0.2s ease-in-out;
+    color: black;
+    background: #BADA55;
+  }
+
+`
 export const H1Calculate = styled.h1 `
 font-size:2rem;
   color:white;
