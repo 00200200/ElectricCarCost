@@ -10,11 +10,11 @@
 The project is used to calculate the cost of maintaining an electric and internal combustion car, and charging time for an electric car
 ## Technologies
 Project is created with:
-*JS ES6
+* JS ES6
 * REACT
 * React-Router
 * Styled Components
-* 
+
 ## Style 
 Project is styled with:
 *Scss and Styled-Components
