@@ -11,7 +11,6 @@ import {
     MainP,
     VideoBg
 } from "./Main.styles";
-import Oblicz from "../../pages/Oblicz/Oblicz";
 import {Link} from "react-router-dom";
 const Main = () => {
     const [hover,setHover] = useState(false)
@@ -25,7 +24,7 @@ const Main = () => {
        </MainBg>
             <MainContent>
             <MainH1>Bądź Eco zainwestuj w przyszłość</MainH1>
-            <MainP>Oblicz koszt utrzymaania elektrycznego pojazdu</MainP>
+            <MainP>Oblicz koszt utrzymania elektrycznego pojazdu</MainP>
             <MainBtnWrapper>
                 <Link  style={{textDecoration:"none"}}to='/Oblicz'>
                 <Button

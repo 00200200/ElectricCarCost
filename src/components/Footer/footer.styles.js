@@ -2,7 +2,11 @@ import styled from "styled-components";
 import {Link} from 'react-router-dom'
 
 export const FooterContainer = styled.div`
-  background-color: #1A1A1A
+  background-color: #1A1A1A;
+  @media screen and (max-width:500px){
+  width:100%;
+    margin:0;
+}
 `
 
 export const FooterWrap = styled.div`

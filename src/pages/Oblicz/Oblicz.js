@@ -23,18 +23,21 @@ const Oblicz = () => {
     const [energyCost, setEnergyCost] = useState("")
     const [energyConsumption, setEnergyConsumption] = useState("")
     const [chargePower, setChargePower] = useState("")
+
+    const [chargeName, setChargeName] = useState("")
     const [chargerCapacity, setChargerCapacity] = useState("")
     const [electricalOutlet, setElectricalOutlet] = useState("")
-    const [chargerIsHidden,setChargerIsHidden] = useState(true)
+    const [chargerIsHidden, setChargerIsHidden] = useState(true)
     const [informations, setInformations] = useState(null) // tablica
     const [displayBtn, setDisplayBtn] = useState(true)
-    const [displayCombustionBtn,setDisplayCombustionBtn] = useState(true)
+    const [displayCombustionBtn, setDisplayCombustionBtn] = useState(true)
     const [error, setError] = useState("")
-    const [errorCombustion,setErrorCombustion] = useState("")
-    const [errorCharger,setErrorCharger] = useState("")
+    const [errorCombustion, setErrorCombustion] = useState("")
+    const [errorCharger, setErrorCharger] = useState("")
     const [isHidden, setIsHidden] = useState(true)
     const [combustionIsHideen, setCombustionIsHidden] = useState(true)
-    const [chargerBtnDisplay,setChargerBtnDisplay] = useState(true)
+    const [chargerBtnDisplay, setChargerBtnDisplay] = useState(true)
+    const [chargeInfo, setChargeInfo] = useState(null)
 // AUTO SPALINOWE
     const [combustionCarName, setCombustionCarName] = useState("")
     const [combustionKmMonth, setCombustionKmMonth] = useState("")
@@ -63,29 +66,40 @@ const Oblicz = () => {
             setError("Wypełnij wszystkie pola, aby przejść dalej")
         }
     })
-    useEffect(()=>{
-        if(combustionCarName != "" && combustionKmMonth != "" && combustionYearCost != "" && combustionVariableServiceYearCost != ""&& combustionVariableTireYearCost != "" && combustionConsumption != "" && FuelCost!= ""){
+    useEffect(() => {
+        if (combustionCarName != "" && combustionKmMonth != "" && combustionYearCost != "" && combustionVariableServiceYearCost != "" && combustionVariableTireYearCost != "" && combustionConsumption != "" && FuelCost != "") {
             setDisplayCombustionBtn(false)
             setErrorCombustion("")
-        } else{
+        } else {
             setDisplayCombustionBtn(true)
             setErrorCombustion("Wypełnij wszystkie pola, aby przejść dalej")
         }
     })
-   useEffect( ()=> {
-       if(chargePower !="" && chargerCapacity != "" && electricalOutlet != ""){
-           setErrorCharger("")
-           setChargerBtnDisplay(false)
-       }else {
-           setChargerBtnDisplay(true)
-           setErrorCharger("Aby obliczyć czas ładowania wypełnij wszystkie pola.")
-       }
-   })
+    useEffect(() => {
+        if (chargePower != "" && chargerCapacity != "" && electricalOutlet != "" && chargeName != "") {
+            setErrorCharger("")
+            setChargerBtnDisplay(false)
+        } else {
+            setChargerBtnDisplay(true)
+            setErrorCharger("Aby obliczyć czas ładowania wypełnij wszystkie pola.")
+        }
+    })
+    // ChargePower == Moc ladowarki
+    //  ElectricalOutlet moc gniazdka
 
     // CALCULATE COMBUSTIONCARS
-    useEffect(()=>{
-
-    })
+    const chargeTime1 = parseInt(chargePower)/ parseInt(chargerCapacity)
+    const chargeTIme2 = electricalOutlet + 2
+    const ChargerOnSubmit = (e) => {
+        e.preventDefault()
+        setChargeInfo([{
+            NAME: chargeName,
+        }])
+        setChargeName("")
+        setChargerCapacity("")
+        setChargePower("")
+        setElectricalOutlet("")
+    }
 
     const CombustionYearKm = combustionKmMonth * 12;
     const CombustionTiresSwap = ((combustionVariableTireYearCost / 50000) * CombustionYearKm)
@@ -95,14 +109,14 @@ const Oblicz = () => {
     const CombustionOneKmCost = CombustionYearCost / CombustionYearKm;
     const CombustionOnSubmit = (e) => {
         e.preventDefault()
-        setCombustionInfo( [ {
+        setCombustionInfo([{
             NAME: combustionCarName,
             YEARKM: CombustionYearKm,
             TIRESWAP: CombustionTiresSwap,
             SERVICECOST: CombustionServiceCost,
             FUELCOST: FuelCost,
             YEARCOST: CombustionYearCost,
-            ONEKMCOST: CombustionOneKmCost,
+            ONEKMCOST: CombustionOneKmCost || 0,
         }])
         setCombustionCarName("")
         setCombustionKmMonth("")
@@ -161,18 +175,21 @@ const Oblicz = () => {
 
     useEffect(() => {
         let AllCombustionInfo = JSON.parse(localStorage.getItem('combustionInfo'))
+
         if (combustionInfo === null) {
             return
         }
         if (AllCombustionInfo === null) {
             AllCombustionInfo = [...combustionInfo]
+            return localStorage.setItem('combustionInfo', JSON.stringify(AllCombustionInfo))
         }
         if (AllCombustionInfo.length > 0) {
             AllCombustionInfo = [...AllCombustionInfo, ...combustionInfo]
             return localStorage.setItem('combustionInfo', JSON.stringify(AllCombustionInfo))
         }
         localStorage.setItem('combustionInfo', JSON.stringify(combustionInfo))
-    })
+    },[combustionInfo]
+    )
 
 
     const setHiddenElectric = () => {
@@ -212,7 +229,11 @@ const Oblicz = () => {
                         <SelectTypeP>AUTO<br></br> SPALINOWE</SelectTypeP>
                     </SelectTypeContainer>
                     <SelectTypeContainer> <RiBattery2ChargeLine onClick={setHiddenCharger}
-                                                                style={{fontSize: "5rem", color: "096cf7", cursor: "pointer"}}>
+                                                                style={{
+                                                                    fontSize: "5rem",
+                                                                    color: "096cf7",
+                                                                    cursor: "pointer"
+                                                                }}>
                     </RiBattery2ChargeLine>
                         <SelectTypeP>CZAS <br></br>LADOWANIA</SelectTypeP>
                     </SelectTypeContainer>
@@ -269,8 +290,8 @@ const Oblicz = () => {
                         placeholder="0.65" type="number"></InputNumber></LabelContainer>
 
 
-
-                    <CalculateInputSubmit onClick={onSubmitClick} style={displayBtn ? {display: "none"} : {display: "flex"}}
+                    <CalculateInputSubmit onClick={onSubmitClick}
+                                          style={displayBtn ? {display: "none"} : {display: "flex"}}
                                           type="submit"></CalculateInputSubmit>
                     <H1Alert>{error}</H1Alert>
                 </FormStyle>
@@ -318,29 +339,37 @@ const Oblicz = () => {
                     value={fuelCost} onChange={e => setFuelCost(e.target.value)} className="inputNumber"
                     placeholder="5,55" type="number"></InputNumber>
                 </LabelContainer>
-                    <CalculateInputSubmit  style={displayCombustionBtn ? {display: "none"} : {display: "flex"}}onClick={CombustionOnSubmit}
+                    <CalculateInputSubmit style={displayCombustionBtn ? {display: "none"} : {display: "flex"}}
+                                          onClick={CombustionOnSubmit}
                                           type="submit"></CalculateInputSubmit>
-               <H1Alert>{errorCombustion}</H1Alert>
+                    <H1Alert>{errorCombustion}</H1Alert>
                 </FormStyle>
                 <FormStyle style={chargerIsHidden ? {display: "none"} : {display: "flex"}}>
                     <H1Calculate>Oblicz czas ładowania</H1Calculate>
                     <LabelContainer>
+                        <CalculateLabel> Nazwa <span>[kW]</span></CalculateLabel> <InputNumber
+                        value={chargeName} onChange={e => setChargeName(e.target.value)} className="inputNumber"
+                        placeholder="Ladowarka X" type="text"></InputNumber>
+                    </LabelContainer>
+                    <LabelContainer>
                         <CalculateLabel> Moc ładowarki <span>[kW]</span></CalculateLabel> <InputNumber
                         value={chargePower} onChange={e => setChargePower(e.target.value)} className="inputNumber"
-                        placeholder="1000" type="number"></InputNumber>
+                        placeholder="7" type="number"></InputNumber>
                     </LabelContainer>
                     <LabelContainer>
                         <CalculateLabel> Pojemność akumulatora <span>[kWh]</span></CalculateLabel> <InputNumber
                         value={chargerCapacity} onChange={e => setChargerCapacity(e.target.value)}
                         className="inputNumber"
-                        placeholder="1000" type="number"></InputNumber></LabelContainer>
+                        placeholder="80" type="number"></InputNumber></LabelContainer>
                     <LabelContainer>
                         <CalculateLabel> Moc gniazda elektrycznego przez które będziemy
                             ładować <span>[kWh]</span></CalculateLabel> <InputNumber
                         value={electricalOutlet} onChange={e => setElectricalOutlet(e.target.value)}
                         className="inputNumber"
-                        placeholder="1000" type="number"></InputNumber></LabelContainer>
-                    <CalculateInputSubmit style={chargerBtnDisplay ? {display: "none"} : {display: "flex"}} type="submit"></CalculateInputSubmit>
+                        placeholder="5" type="number"></InputNumber></LabelContainer>
+                    <CalculateInputSubmit onClick={ChargerOnSubmit}
+                                          style={chargerBtnDisplay ? {display: "none"} : {display: "flex"}}
+                                          type="submit"></CalculateInputSubmit>
                     <H1Alert>{errorCharger}</H1Alert>
                 </FormStyle>
             </ObliczContainer>

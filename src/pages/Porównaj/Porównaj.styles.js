@@ -70,7 +70,10 @@ export const CombustionCarContainer = styled.div`
   background-color:#1C1C21;
   border-radius: 3rem;
   padding:2rem;
-  margin-bottom:0;
+  margin-bottom:1rem;
+  :last-of-type{
+    margin-bottom: 1rem;
+  }
   @media screen and (max-width:500px) {
   width: 100%;
   text-align:justify-all;
