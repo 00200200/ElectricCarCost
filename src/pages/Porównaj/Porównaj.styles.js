@@ -83,3 +83,18 @@ export const CombustionCarContainer = styled.div`
 
 
 `
+export const ChargeTimeContainer = styled.div`
+  width:50vw;
+  margin:2rem auto;
+  text-align:center;
+  text-decoration:none;
+  list-style:none;
+  background-color:#096cf7;
+  border-radius: 3rem;
+  padding:2rem;
+  @media screen and (max-width:500px) {
+    width: 100%;
+    text-align:justify-all;
+    margin:0;
+    padding:0
+`

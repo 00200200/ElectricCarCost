@@ -5,7 +5,7 @@ import {ECarContainer, H1StyledCar, H1Styled, ListContainer, UlStyled, LiStyled}
 import CompareCombustionCar from "./CompareCombustionCar";
 import {Button} from "../../components/MainBodyUnderHeader/Main.styles";
 import {Link} from "react-router-dom";
-
+import ChargingTime from "./ChargingTime";
 const Porównaj = () => {
     const AllCostInfo = JSON.parse(localStorage.getItem('costInfo'))
 
@@ -17,6 +17,7 @@ const Porównaj = () => {
                     <Link style={{textDecoration:"none"}} to="/Oblicz"><Button style={{margin:"0 auto" ,textDecoration:"none"}}>Oblicz</Button></Link>
                 </ListContainer>
                 <CompareCombustionCar/>
+                <ChargingTime/>
                 <Footer></Footer>
             </>
         )
@@ -55,6 +56,8 @@ const Porównaj = () => {
                 }
 
                 <CompareCombustionCar/>
+                <ChargingTime/>
+
             </ListContainer>
             <Footer></Footer></>
     )
