@@ -34,10 +34,11 @@ const Oblicz = () => {
     const [error, setError] = useState("")
     const [errorCombustion, setErrorCombustion] = useState("")
     const [errorCharger, setErrorCharger] = useState("")
-    const [isHidden, setIsHidden] = useState(true)
+    const [isHidden, setIsHidden] = useState(false)
     const [combustionIsHideen, setCombustionIsHidden] = useState(true)
     const [chargerBtnDisplay, setChargerBtnDisplay] = useState(true)
     const [chargeInfo, setChargeInfo] = useState(null)
+    const [chargeTime,setChargeTime] = useState(null)
 // AUTO SPALINOWE
     const [combustionCarName, setCombustionCarName] = useState("")
     const [combustionKmMonth, setCombustionKmMonth] = useState("")
@@ -86,20 +87,45 @@ const Oblicz = () => {
     })
     // ChargePower == Moc ladowarki
     //  ElectricalOutlet moc gniazdka
-
     // CALCULATE COMBUSTIONCARS
-    const chargeTime1 = parseInt(chargePower)/ parseInt(chargerCapacity)
-    const chargeTIme2 = electricalOutlet + 2
+    // useEffect = () => {
+    //     if (chargePower != "" && electricalOutlet != "" && chargerCapacity != ""){
+    //         return
+    //     }
+    //     if (chargePower  < electricalOutlet){
+    //            setChargeTime(parseInt(chargerCapacity) / parseInt(chargePower))
+    //
+    //     }else {
+    //          setChargeTime(parseInt(chargerCapacity) / parseInt(electricalOutlet))
+    //     }
+    // }
+//
+//     if(chargeTIme1 < chargeTIme2){
+//         setChargeTime(chargeTIme1)
+//     }
+//     else{setChargeTime(chargeTIme2)}
+    useEffect(()=>{
+        const chargeTIme1 = parseInt(chargerCapacity) / parseInt(chargePower)
+        const chargeTIme2 = parseInt(chargerCapacity) / parseInt(electricalOutlet)
+        if(chargeTIme1 < chargeTIme2){
+            setChargeTime(chargeTIme1)
+        }else{setChargeTime(chargeTIme2)}
+        console.log(chargeTIme1,chargeTIme2)
+
+    })
     const ChargerOnSubmit = (e) => {
         e.preventDefault()
         setChargeInfo([{
             NAME: chargeName,
+            CHARGETIME:chargeTime
         }])
         setChargeName("")
         setChargerCapacity("")
         setChargePower("")
         setElectricalOutlet("")
     }
+
+
 
     const CombustionYearKm = combustionKmMonth * 12;
     const CombustionTiresSwap = ((combustionVariableTireYearCost / 50000) * CombustionYearKm)
@@ -190,7 +216,21 @@ const Oblicz = () => {
         localStorage.setItem('combustionInfo', JSON.stringify(combustionInfo))
     },[combustionInfo]
     )
-
+   useEffect( ()=> {
+       let ChargingTimeInfo = JSON.parse(localStorage.getItem('chargingInfo'))
+       if (chargeInfo === null){
+           return
+       }
+       if(ChargingTimeInfo === null){
+           ChargingTimeInfo = [...chargeInfo]
+           return localStorage.setItem('chargingInfo',JSON.stringify(ChargingTimeInfo))
+       }
+       if(ChargingTimeInfo.length >0){
+           ChargingTimeInfo = [...ChargingTimeInfo,...chargeInfo]
+           return localStorage.setItem('chargingInfo',JSON.stringify(ChargingTimeInfo))
+       }
+       localStorage.setItem('chargingInfo', JSON.stringify(chargeInfo))
+   },[chargeInfo])
 
     const setHiddenElectric = () => {
         setIsHidden(false)
@@ -344,7 +384,7 @@ const Oblicz = () => {
                                           type="submit"></CalculateInputSubmit>
                     <H1Alert>{errorCombustion}</H1Alert>
                 </FormStyle>
-                <FormStyle style={chargerIsHidden ? {display: "none"} : {display: "flex"}}>
+                <FormStyle  style={chargerIsHidden ? {display: "none"} : {display: "flex"}}>
                     <H1Calculate>Oblicz czas ładowania</H1Calculate>
                     <LabelContainer>
                         <CalculateLabel> Nazwa <span>[kW]</span></CalculateLabel> <InputNumber
@@ -377,6 +417,6 @@ const Oblicz = () => {
 
         </>
     );
-};
+}
 
 export default Oblicz;

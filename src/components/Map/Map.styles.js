@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const MapContainer = styled.div`
   width: 90vw;
-  background: #f6f6f6;
+  background: #bada55;
 `
 export const MapStyled = styled.div`
   background: gray;
