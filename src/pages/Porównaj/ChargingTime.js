@@ -13,7 +13,7 @@ const ChargingTime = () => {
     const ChargeTimeInfo = JSON.parse(localStorage.getItem('chargingInfo'));
     console.log(ChargeTimeInfo)
     if(ChargeTimeInfo === null){
-        return (<h1>Dodaj czas ładowania do porównania</h1>
+        return (<h1 style={{"text-align":"center"}}>Dodaj czas ładowania do porównania</h1>
         )
     }
     return (<>

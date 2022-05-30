@@ -8,7 +8,7 @@ const CompareCombustionCar = () => {
     const CombustionAllCostInfo = JSON.parse(localStorage.getItem('combustionInfo'))
     console.log(CombustionAllCostInfo)
     if (CombustionAllCostInfo === null){
-        return (<h1>
+        return (<h1 style={{textAlign:"center",margin:"1em"}}>
             Dodaj auto spalinowe do porównania
         </h1>)
     }
