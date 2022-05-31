@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/ElectricCarCost/static/css/main.c33b6d93.chunk.css",
+    "main.js": "/ElectricCarCost/static/js/main.61585473.chunk.js",
+    "main.js.map": "/ElectricCarCost/static/js/main.61585473.chunk.js.map",
+    "runtime-main.js": "/ElectricCarCost/static/js/runtime-main.7766c3fe.js",
+    "runtime-main.js.map": "/ElectricCarCost/static/js/runtime-main.7766c3fe.js.map",
+    "static/css/2.4be38407.chunk.css": "/ElectricCarCost/static/css/2.4be38407.chunk.css",
+    "static/js/2.21c02892.chunk.js": "/ElectricCarCost/static/js/2.21c02892.chunk.js",
+    "static/js/2.21c02892.chunk.js.map": "/ElectricCarCost/static/js/2.21c02892.chunk.js.map",
+    "static/js/3.381f40a4.chunk.js": "/ElectricCarCost/static/js/3.381f40a4.chunk.js",
+    "static/js/3.381f40a4.chunk.js.map": "/ElectricCarCost/static/js/3.381f40a4.chunk.js.map",
+    "index.html": "/ElectricCarCost/index.html",
+    "static/css/2.4be38407.chunk.css.map": "/ElectricCarCost/static/css/2.4be38407.chunk.css.map",
+    "static/css/main.c33b6d93.chunk.css.map": "/ElectricCarCost/static/css/main.c33b6d93.chunk.css.map",
+    "static/js/2.21c02892.chunk.js.LICENSE.txt": "/ElectricCarCost/static/js/2.21c02892.chunk.js.LICENSE.txt",
+    "static/media/Background.31814843.png": "/ElectricCarCost/static/media/Background.31814843.png",
+    "static/media/ElectricFarmVideo.c01b257f.mp4": "/ElectricCarCost/static/media/ElectricFarmVideo.c01b257f.mp4"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7766c3fe.js",
+    "static/css/2.4be38407.chunk.css",
+    "static/js/2.21c02892.chunk.js",
+    "static/css/main.c33b6d93.chunk.css",
+    "static/js/main.61585473.chunk.js"
+  ]
+}
